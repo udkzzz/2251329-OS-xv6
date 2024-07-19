@@ -86,6 +86,15 @@ enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
 struct proc {
   struct spinlock lock;
 
+  // 用户页中警报处理函数的虚拟地址
+  uint64 handler_va;
+  int alarm_interval;
+  int passed_ticks;
+  // 保存寄存器，以便在返回中断代码时重新存储。
+  struct trapframe saved_trapframe;
+  // bool 值，表示警报处理程序是否返回。
+  int have_return;
+
   // p->lock must be held when using these:
   enum procstate state;        // Process state
   void *chan;                  // If non-zero, sleeping on chan
