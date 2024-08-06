@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "type_traits": "c"
+        "memlayout.h": "c",
+        "sleeplock.h": "c"
     }
 }
